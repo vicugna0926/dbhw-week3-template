@@ -12,29 +12,68 @@ function SinglyLinkedList() {
 SinglyLinkedList.prototype.add = function(data) {
   var node = new Node(data);
   if(!this.head) {
+    this.head = node;
+    this.tail = node;
     //TODO
   } else {
+    this.tail.next = node;
+    this.tail = node;
     //TODO
   }
-
+  this.numberOfValues++;
 };
 
 SinglyLinkedList.prototype.remove = function(data) {
   var previous = this.head;
   var current = this.head;
+  while(current){
+    if(current.data === data){
+      this.head = this.head.next;
+    }
+    if(current === this.tail){
+      this.tail = previous;
+      previous.next = current.next;
+      this.numberOfValues;
+    } else {
+      previous = current
+    }
+  current = current.next;
+  }
   //TODO
 };
 
 SinglyLinkedList.prototype.insertAfter = function(data, toNodeData) {
   var current = this.head;
+  while(current) {
+    if(current.data === toNodeData){
+      var node = new Node(data);
+      if(current === this.tail){
+        this.tail.next = node;
+        this.tail = node;
+      }else{
+        node.next = current.next;
+        current.next = node;
+      }
+      this.numberOfValues++;
+    }
+    current = current.next;
+  }
   //TODO
 };
 
 SinglyLinkedList.prototype.length = function() {
+  return this.numberOfValues;
   //TODO
 };
 
 SinglyLinkedList.prototype.print = function() {
+  var string = '';
+  var current = this.head;
+  while(current){
+    string += current.data + '';
+    current = current.next;
+  }
+  return string.trim();
   //TODO
 };
 
